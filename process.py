@@ -1,28 +1,19 @@
-import queue
-import threading
-import numpy as np
-import time
-import os
-"""
+#access token: 1165945693627809792-v3O1zGduCeiXhgfxwQV9BlIM6fTMsL
+#access token secret: 4vLxm2RC4lkP30anwghf80jZbFKSyncxYPHYSrr1n8ZPN
+import tweepy
+from PIL import Image, ImageDraw, ImageFont
 
-"""
+consumer_key = 'R1Yz5Zv7eaa5rFs6dL7aIMgZj'
+consumer_secret = 'U6U1pbXho1KH6UIiu2b2YuiAlh02kHMYFICGmU6pSbljUngD3E'
+access_token = '1165945693627809792-v3O1zGduCeiXhgfxwQV9BlIM6fTMsL'
+access_token_secret = '4vLxm2RC4lkP30anwghf80jZbFKSyncxYPHYSrr1n8ZPN'
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 
-class VideoCompressor():
+api = tweepy.API(auth)
 
-    def __init__ (self, pool_size = 3, queue_size = 10):
-        self.pool_size = pool_size
-        self.queue_size = queue_size
+def txt2img
 
-    def compress(self, name):
-        os.system(f'ffmpeg -i {name} -b:v 2M -b:a 192k -filter:v fps=fps=30 -s hd720 -c:v libx264 -crf 23 -c:a aac -strict -2 {name}_output.avi')
-
-    def execute(self, name):
-        name = threading.current_thread().getName()
-        t = threading.Thread(target = self.compress, args = (name,) )
-        t.start()
-
-
-Compressor1 = VideoCompressor()
-Compressor2 = VideoCompressor()
-Compressor2.execute()
-Compressor1.execute()
+public_tweets = api.user_timeline(screen_name = '@realDonaldTrump', count = 1, include_rts = False)
+for tweet in public_tweets:
+    print(tweet.text)
