@@ -1,13 +1,8 @@
 import queue
 import threading
-import numpy as np
 import time
 import os
 import cv2
-import glob
-import pprint
-#access token: 1165945693627809792-v3O1zGduCeiXhgfxwQV9BlIM6fTMsL
-#access token secret: 4vLxm2RC4lkP30anwghf80jZbFKSyncxYPHYSrr1n8ZPN
 import tweepy
 from process import tweet_convert
 
