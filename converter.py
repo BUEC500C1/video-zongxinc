@@ -53,7 +53,6 @@ def add_thread(username, imagepath, num):
         t.start()
     if thread_num >= 6:
         q.put(t)
-        print('added')
     return t
 
 q = queue.Queue(100)
