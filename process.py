@@ -31,7 +31,7 @@ def save_object(obj, filename):
 def get_api():
     try:
         config = configparser.ConfigParser()
-        config.read("keyss")
+        config.read("keys")
         auth = tweepy.OAuthHandler(config.get('auth', 'consumer_key').strip(), config.get('auth', 'consumer_secret').strip())
         auth.set_access_token(config.get('auth', 'access_token').strip(), config.get('auth', 'access_secret').strip())
         api = tweepy.API(auth)
