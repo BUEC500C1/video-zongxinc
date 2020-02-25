@@ -6,16 +6,31 @@ import glob
 import pprint
 import os
 from PIL import Image, ImageDraw, ImageFont
+import configparser
 
-consumer_key = 'R1Yz5Zv7eaa5rFs6dL7aIMgZj'
-consumer_secret = 'U6U1pbXho1KH6UIiu2b2YuiAlh02kHMYFICGmU6pSbljUngD3E'
-access_token = '1165945693627809792-v3O1zGduCeiXhgfxwQV9BlIM6fTMsL'
-access_token_secret = '4vLxm2RC4lkP30anwghf80jZbFKSyncxYPHYSrr1n8ZPN'
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
 
-api = tweepy.API(auth)
+# consumer_key = 'R1Yz5Zv7eaa5rFs6dL7aIMgZj'
+# consumer_secret = 'U6U1pbXho1KH6UIiu2b2YuiAlh02kHMYFICGmU6pSbljUngD3E'
+# access_token = '1165945693627809792-v3O1zGduCeiXhgfxwQV9BlIM6fTMsL'
+# access_token_secret = '4vLxm2RC4lkP30anwghf80jZbFKSyncxYPHYSrr1n8ZPN'
+# auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+# auth.set_access_token(access_token, access_token_secret)
 
+# config = configparser.ConfigParser()
+# config.read("keys")
+# auth = tweepy.OAuthHandler(config.get('auth', 'consumer_key').strip(), config.get('auth', 'consumer_secret').strip())
+# auth.set_access_token(config.get('auth', 'access_token').strip(), config.get('auth', 'access_secret').strip())
+
+# api = tweepy.API(auth)
+def get_api():
+    config = configparser.ConfigParser()
+    config.read("keys")
+    auth = tweepy.OAuthHandler(config.get('auth', 'consumer_key').strip(), config.get('auth', 'consumer_secret').strip())
+    auth.set_access_token(config.get('auth', 'access_token').strip(), config.get('auth', 'access_secret').strip())
+    api = tweepy.API(auth)
+    print('api:    ')
+    print(api)
+    return api
 
 def deEmojify(inputString):
     return inputString.encode('ascii', 'ignore').decode('ascii')
@@ -31,9 +46,7 @@ def txt2img(txt, user, num):
 	img.save(filename)
 
 def get_tweets(name, numOfTweets):
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth)
+    api = get_api()
     alltweets = []
     new_tweets = api.user_timeline(screen_name = name, count = numOfTweets)
     for tweet in new_tweets:
