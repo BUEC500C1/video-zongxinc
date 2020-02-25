@@ -7,6 +7,8 @@ import pprint
 import os
 from PIL import Image, ImageDraw, ImageFont
 import configparser
+import pickle
+
 
 
 # consumer_key = 'R1Yz5Zv7eaa5rFs6dL7aIMgZj'
@@ -22,14 +24,21 @@ import configparser
 # auth.set_access_token(config.get('auth', 'access_token').strip(), config.get('auth', 'access_secret').strip())
 
 # api = tweepy.API(auth)
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
+
 def get_api():
-    config = configparser.ConfigParser()
-    config.read("keys")
-    auth = tweepy.OAuthHandler(config.get('auth', 'consumer_key').strip(), config.get('auth', 'consumer_secret').strip())
-    auth.set_access_token(config.get('auth', 'access_token').strip(), config.get('auth', 'access_secret').strip())
-    api = tweepy.API(auth)
-    print('api:    ')
-    print(api)
+    try:
+        config = configparser.ConfigParser()
+        config.read("keyss")
+        auth = tweepy.OAuthHandler(config.get('auth', 'consumer_key').strip(), config.get('auth', 'consumer_secret').strip())
+        auth.set_access_token(config.get('auth', 'access_token').strip(), config.get('auth', 'access_secret').strip())
+        api = tweepy.API(auth)
+    except:
+        with open('api.pkl', 'rb') as input:
+            api = pickle.load(input)
+
     return api
 
 def deEmojify(inputString):
