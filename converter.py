@@ -58,8 +58,8 @@ def add_thread(username, imagepath, num):
 
 q = queue.Queue(100)
 mycompressor = Video_compress()
-input_list = ['@iGuessPoems','@UnusualPoems', '@LitWorks', '@Poem4your_sprog']
-compressVideo(input_list,10)
+#input_list = ['@iGuessPoems','@UnusualPoems', '@LitWorks', '@Poem4your_sprog']
+#compressVideo(['@LitWorks'],10)
 
 # class VideoCompressor():
 
