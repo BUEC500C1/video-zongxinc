@@ -8,6 +8,8 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 import configparser
 import pickle
+import shutil
+import zipfile
 
 
 
@@ -85,7 +87,9 @@ def makevideo(filepath,videoname):
            list.append(file)  
     print(len(list))
     list.sort()
-    video=cv2.VideoWriter(f'./{videoname}.avi', cv2.VideoWriter_fourcc(*'MJPG'), 0.333, (1600,500))
+    video=cv2.VideoWriter(f'{videoname}.avi', cv2.VideoWriter_fourcc(*'MJPG'), 0.333, (1600,500))
+    if not os.path.isdir('./video'):
+        os.mkdir('./video')
     for i in range(1,len(list)+1):
         img=cv2.imread(f'{filepath}'+list[i-1])
         img=cv2.resize(img, (1600,500)) 
@@ -93,6 +97,16 @@ def makevideo(filepath,videoname):
     for e in list:
         print(e)
         os.remove(f'{filepath}{e}')
+    for root,dirs,files in os.walk('./'):
+        for file in files:
+            if file.endswith('.avi'):
+                path = os.path.join(root, file)
+                shutil.move(path, './video')
+                print('yes')
+
+    # file_path = os.path.join('./video', f'{videoname}.avi')
+    # os.rename('README.md', f'./video/{videoname}.avi')
+    # shutil.move('README.md', f'./video/{videoname}.avi')
 
 # name = '@realDonaldTrump'
 # public_tweets = api.user_timeline(screen_name = name, count = 10)

@@ -2,6 +2,8 @@
 
 from flask import Flask, request, render_template, send_file
 import converter
+import zipfile
+import os
 
 app = Flask(__name__)
 
@@ -22,7 +24,16 @@ def file_download():
 
 @app.route('/return-file/')
 def return_file():
-    return send_file('v_@LITWORKS.avi')
+	zipFolder = zipfile.ZipFile('videos.zip','w', zipfile.ZIP_DEFLATED) 
+	for root, directs, files in os.walk('./video'):
+		if os.path.exists('./video/.DS_Store'):
+			os.remove('./video/.DS_Store')
+		for f in files:
+			print(f)
+			zipFolder.write('./video/' + str(f))
+			zipFolder.close()
+
+	return send_file('videos.zip', mimetype ='zip', attachment_filename = 'videos.zip', as_attachment=True)
 
 
 if __name__ == '__main__':
