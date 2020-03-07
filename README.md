@@ -8,3 +8,8 @@ consumer_key = ****
 consumer_secret = ****
 access_token = ****
 access_secret = ****
+
+###
+Now the project is made restful, but after submit the file on the website, let's say:0.0.0.0:80, you have to manually add '/file-download' at the end to get to the download site, like: 0.0.0.0:80/file-download.
+
+accessing the through aws via 
