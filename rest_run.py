@@ -26,8 +26,8 @@ def file_download():
 def return_file():
 	zipFolder = zipfile.ZipFile('videos.zip','w', zipfile.ZIP_DEFLATED) 
 	for root, directs, files in os.walk('./video'):
-		if os.path.exists('./video/.DS_Store'):
-			os.remove('./video/.DS_Store')
+		# if os.path.exists('./video/.DS_Store'):
+		# 	os.remove('./video/.DS_Store')
 		for f in files:
 			print(f)
 			zipFolder.write('./video/' + str(f))
