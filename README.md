@@ -16,9 +16,15 @@ accessing the through aws via
 
 ec2-18-220-92-202.us-east-2.compute.amazonaws.com:5000
 
+or(if above does not work)
+
+18.220.185.253:5000
+
 and then download at 
 
 ec2-18-220-92-202.us-east-2.compute.amazonaws.com:5000/file-download
+
+18.220.185.253:5000/file-download
 
 ![](myimage/ip.png)
 ![](myimage/security.png)
